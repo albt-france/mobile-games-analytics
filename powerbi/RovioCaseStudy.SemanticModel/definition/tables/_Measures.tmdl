@@ -1,0 +1,164 @@
+table _Measures
+	lineageTag: 1e3ae136-29b2-436c-a321-07c0628cca01
+
+	measure Installs = CALCULATE ( COUNTROWS ( Players ), USERELATIONSHIP ( Players[install_date], 'Date'[Date] ) )
+		formatString: #,0
+		displayFolder: UA
+		lineageTag: 68ba3f35-23be-4d6a-ac22-91f5b7833d23
+
+	measure 'Paid Installs' = CALCULATE ( [Installs], Players[channel] <> "Organic" )
+		formatString: #,0
+		displayFolder: UA
+		lineageTag: cb11bfaa-ad69-4b77-bc48-4d82854d1409
+
+	measure 'Total UA Spend' = SUM ( 'UA Spend'[spend_eur] )
+		formatString: €#,0
+		displayFolder: UA
+		lineageTag: 3fdef2a3-f1a5-49bc-8cc3-f8c9a488fa03
+
+	measure CPI = DIVIDE ( [Total UA Spend], SUM ( 'UA Spend'[installs] ) )
+		formatString: €#,0.00
+		displayFolder: UA
+		lineageTag: 2b280076-e971-4afc-8fa3-8daeaa02e79f
+
+	measure Revenue = SUMX ( Activity, Activity[iap_revenue_eur] + Activity[ad_revenue_eur] )
+		formatString: €#,0
+		displayFolder: Monetization
+		lineageTag: 97751653-9670-4835-947d-fb2c40963182
+
+	measure 'IAP Revenue' = SUM ( Activity[iap_revenue_eur] )
+		formatString: €#,0
+		displayFolder: Monetization
+		lineageTag: 0bf384ba-834f-4bc7-9428-801787d8f94e
+
+	measure 'Ad Revenue' = SUM ( Activity[ad_revenue_eur] )
+		formatString: €#,0
+		displayFolder: Monetization
+		lineageTag: f7fcf69c-7c7b-4537-9cd5-1df4d4428ce0
+
+	measure 'Ad Share' = DIVIDE ( [Ad Revenue], [Revenue] )
+		formatString: 0%
+		displayFolder: Monetization
+		lineageTag: 173b82f1-3612-4bd6-9669-8807edd40bbb
+
+	measure 'Active Player Days' = SUMX ( VALUES ( 'Date'[Date] ), CALCULATE ( DISTINCTCOUNT ( Activity[player_id] ) ) )
+		formatString: #,0
+		displayFolder: Engagement
+		lineageTag: 35e05e77-6e74-424d-9958-038cd95aa4a0
+
+	measure DAU = DIVIDE ( [Active Player Days], DISTINCTCOUNT ( Activity[activity_date] ) )
+		formatString: #,0
+		displayFolder: Engagement
+		lineageTag: fc50f34b-fa22-47f6-9fa5-c2e9e9ed3542
+
+	measure ARPDAU = DIVIDE ( [Revenue], [Active Player Days] )
+		formatString: €0.000
+		displayFolder: Monetization
+		lineageTag: 12f5f569-f181-4812-8589-9534fc1b50d2
+
+	measure Payers = CALCULATE ( DISTINCTCOUNT ( Activity[player_id] ), Activity[iap_revenue_eur] > 0 )
+		formatString: #,0
+		displayFolder: Monetization
+		lineageTag: ecd85b85-aeb9-4660-980b-9717414b5a5d
+
+	measure 'Payer Conversion' = DIVIDE ( [Payers], DISTINCTCOUNT ( Activity[player_id] ) )
+		formatString: 0.0%
+		displayFolder: Monetization
+		lineageTag: e41ed660-fadd-4e03-b140-c3bc52ceb2ab
+
+	measure 'Cohort Retention' = DIVIDE ( SUM ( 'Cohort Retention'[active_players] ), SUM ( 'Cohort Retention'[installs] ) )
+		formatString: 0.0%
+		displayFolder: Engagement
+		lineageTag: f19f4a37-9a5a-4840-83c5-7b3c4a31b815
+
+	measure 'ROAS D7' = DIVIDE ( SUMX ( 'Channel ROAS', 'Channel ROAS'[roas_d7] * 'Channel ROAS'[spend_eur] ), SUM ( 'Channel ROAS'[spend_eur] ) )
+		formatString: 0%
+		displayFolder: UA
+		lineageTag: f489f2a6-462d-459b-8df4-af23c3568b27
+
+	measure 'ROAS D30' = DIVIDE ( SUMX ( 'Channel ROAS', 'Channel ROAS'[roas_d30] * 'Channel ROAS'[spend_eur] ), SUM ( 'Channel ROAS'[spend_eur] ) )
+		formatString: 0%
+		displayFolder: UA
+		lineageTag: 9731f686-b708-4b42-8ede-20590eac1061
+
+	measure 'ROAS D90' = DIVIDE ( SUMX ( 'Channel ROAS', 'Channel ROAS'[roas_d90] * 'Channel ROAS'[spend_eur] ), SUM ( 'Channel ROAS'[spend_eur] ) )
+		formatString: 0%
+		displayFolder: UA
+		lineageTag: 35a7f3e0-8547-4fdd-a4b6-c55b4c9db45e
+
+	measure 'LTV Forecast' = SUM ( 'LTV Curves'[ltv_forecast_eur] )
+		formatString: €0.00
+		displayFolder: LTV
+		lineageTag: a38020b4-e72d-4d71-9cbf-2a9f48fb9787
+
+	measure 'LTV Observed' = SUM ( 'LTV Curves'[ltv_actual_eur] )
+		formatString: €0.00
+		displayFolder: LTV
+		lineageTag: 192c32f2-d8d9-4494-9148-dc037a7c3673
+
+	measure 'CPI Line' = SUM ( 'LTV Forecast'[cpi_eur] )
+		formatString: €0.00
+		displayFolder: LTV
+		lineageTag: 9e7f9d5d-1a9e-41a2-aa56-ca121687d409
+
+	measure 'LTV D365' = SUM ( 'LTV Forecast'[ltv_d365_forecast] )
+		formatString: €0.00
+		displayFolder: LTV
+		lineageTag: 1cb413d4-3b65-4127-811b-b22b88f3ca40
+
+	measure 'ROAS D365 Forecast' = DIVIDE ( [LTV D365], [CPI Line] )
+		formatString: 0%
+		displayFolder: LTV
+		lineageTag: e6830739-990b-4d8b-8ef1-1b14d5340fab
+
+	measure 'Payback Day' = MIN ( 'LTV Forecast'[payback_day] )
+		formatString: #,0
+		displayFolder: LTV
+		lineageTag: c6017660-c970-4e3e-8e53-f661df957127
+
+	measure 'Rovio Gross Bookings (EUR m)' = SUM ( 'Rovio Games'[gross_bookings_eur_m] )
+		formatString: #,0.0
+		displayFolder: Rovio
+		lineageTag: bd69335b-7f3d-4bd7-83e6-b68107215643
+
+	measure 'Rovio UA (EUR m)' = SUM ( 'Rovio Quarterly'[ua_eur_m] )
+		formatString: #,0.0
+		displayFolder: Rovio
+		lineageTag: e2faeb0a-6ba5-4d33-8efc-704291f91e28
+
+	measure 'Rovio UA Share' = DIVIDE ( [Rovio UA (EUR m)], CALCULATE ( SUM ( 'Rovio Quarterly'[gross_bookings_total_eur_m] ), NOT ISBLANK ( 'Rovio Quarterly'[ua_eur_m] ) ) )
+		formatString: 0.0%
+		displayFolder: Rovio
+		lineageTag: 62c609dd-9d80-453e-9f9c-e288aac02fb4
+
+	measure 'Rovio ARPDAU Top 5' = AVERAGE ( 'Rovio Quarterly'[arpdau_top5_eur] )
+		formatString: €0.00
+		displayFolder: Rovio
+		lineageTag: 8942f64b-fdd8-42eb-aad9-5a4a99db8eb5
+
+	measure 'Rovio DAU Top 5 (m)' = AVERAGE ( 'Rovio Quarterly'[dau_top5_m] )
+		formatString: #,0.0
+		displayFolder: Rovio
+		lineageTag: 6b000a94-ad98-4403-9d1d-ee6ba49e3439
+
+	measure 'AB D7 Gap (pts)' = CALCULATE ( SUM ( 'AB Test'[difference_pts] ), 'AB Test'[metric] = "D7" )
+		formatString: 0.00 \p\t\s
+		displayFolder: AB test
+		lineageTag: a6372546-8eeb-4089-9e7e-e470c3d6f29c
+
+	measure 'AB D7 p-value' = CALCULATE ( SUM ( 'AB Test'[p_value] ), 'AB Test'[metric] = "D7" )
+		formatString: 0.0000
+		displayFolder: AB test
+		lineageTag: a770b70e-cef1-436a-a3f4-eff8560554a3
+
+	column _
+		dataType: string
+		isHidden
+		lineageTag: 956a244f-09ac-45ff-9387-9afce7b98f11
+		summarizeBy: none
+		sourceColumn: _
+
+	partition _Measures = m
+		mode: import
+		source = #table(type table [_ = text], {})
+

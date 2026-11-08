@@ -1,0 +1,32 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_ProTooling = ["TMDLView_Desktop","DevMode"]
+
+annotation PBI_QueryOrder = ["Players","Activity","UA Spend","Cohort Retention","Channel ROAS","LTV Curves","LTV Forecast","AB Test","Rovio Quarterly","Rovio Games","Channel","Country","Date","_Measures","DataFolder"]
+
+ref table Players
+ref table Activity
+ref table 'UA Spend'
+ref table 'Cohort Retention'
+ref table 'Channel ROAS'
+ref table 'LTV Curves'
+ref table 'LTV Forecast'
+ref table 'AB Test'
+ref table 'Rovio Quarterly'
+ref table 'Rovio Games'
+ref table Channel
+ref table Country
+ref table Date
+ref table _Measures
+
+ref cultureInfo fr-FR
+

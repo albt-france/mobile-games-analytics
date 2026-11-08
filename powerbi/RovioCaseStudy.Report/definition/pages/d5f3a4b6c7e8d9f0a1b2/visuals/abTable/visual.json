@@ -1,0 +1,231 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "abTable",
+  "position": {
+    "x": 32,
+    "y": 848,
+    "z": 7000,
+    "height": 180,
+    "width": 1856,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AB Test"
+                    }
+                  },
+                  "Property": "metric"
+                }
+              },
+              "queryRef": "AB Test.metric",
+              "nativeQueryRef": "metric",
+              "displayName": "Metric"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AB Test"
+                    }
+                  },
+                  "Property": "gate_30"
+                }
+              },
+              "queryRef": "AB Test.gate_30",
+              "nativeQueryRef": "gate_30",
+              "displayName": "Gate 30"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AB Test"
+                    }
+                  },
+                  "Property": "gate_40"
+                }
+              },
+              "queryRef": "AB Test.gate_40",
+              "nativeQueryRef": "gate_40",
+              "displayName": "Gate 40"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AB Test"
+                    }
+                  },
+                  "Property": "difference_pts"
+                }
+              },
+              "queryRef": "AB Test.difference_pts",
+              "nativeQueryRef": "difference_pts",
+              "displayName": "Gap (pts)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AB Test"
+                    }
+                  },
+                  "Property": "ci_low_pts"
+                }
+              },
+              "queryRef": "AB Test.ci_low_pts",
+              "nativeQueryRef": "ci_low_pts",
+              "displayName": "95% CI low (pts)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AB Test"
+                    }
+                  },
+                  "Property": "ci_high_pts"
+                }
+              },
+              "queryRef": "AB Test.ci_high_pts",
+              "nativeQueryRef": "ci_high_pts",
+              "displayName": "95% CI high (pts)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AB Test"
+                    }
+                  },
+                  "Property": "p_value"
+                }
+              },
+              "queryRef": "AB Test.p_value",
+              "nativeQueryRef": "p_value",
+              "displayName": "p-value"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AB Test"
+                    }
+                  },
+                  "Property": "prob_gate30_better"
+                }
+              },
+              "queryRef": "AB Test.prob_gate30_better",
+              "nativeQueryRef": "prob_gate30_better",
+              "displayName": "P(gate 30 better), bootstrap"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#52514E'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Test statistics (a CI that excludes 0 means the gap is significant)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

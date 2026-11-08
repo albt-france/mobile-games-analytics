@@ -1,0 +1,163 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "howto",
+  "position": {
+    "x": 32,
+    "y": 854,
+    "z": 10000,
+    "height": 174,
+    "width": 1856,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "How to read this report",
+                    "textStyle": {
+                      "fontSize": "17pt",
+                      "color": "#0B0B0B",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Titles  ",
+                    "textStyle": {
+                      "fontSize": "14pt",
+                      "color": "#52514E",
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "state the conclusion of the page.     ",
+                    "textStyle": {
+                      "fontSize": "15pt",
+                      "color": "#0B0B0B"
+                    }
+                  },
+                  {
+                    "value": "Tags  ",
+                    "textStyle": {
+                      "fontSize": "14pt",
+                      "color": "#52514E",
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "PUBLIC / SIMULATED / REAL mark where the data comes from.     ",
+                    "textStyle": {
+                      "fontSize": "15pt",
+                      "color": "#0B0B0B"
+                    }
+                  },
+                  {
+                    "value": "Dashed lines  ",
+                    "textStyle": {
+                      "fontSize": "14pt",
+                      "color": "#52514E",
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "mark break-even or a threshold.     ",
+                    "textStyle": {
+                      "fontSize": "15pt",
+                      "color": "#0B0B0B"
+                    }
+                  },
+                  {
+                    "value": "Code  ",
+                    "textStyle": {
+                      "fontSize": "14pt",
+                      "color": "#52514E",
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "SQL, Python notebook and Power BI project in the repository.",
+                    "textStyle": {
+                      "fontSize": "15pt",
+                      "color": "#0B0B0B"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "16D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "16D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

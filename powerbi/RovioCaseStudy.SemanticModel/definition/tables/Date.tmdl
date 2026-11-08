@@ -1,0 +1,39 @@
+table Date
+	lineageTag: 00f6abd8-3261-4ad3-9c7b-1f938441413c
+	dataCategory: Time
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: dd mmm yyyy
+		lineageTag: 08760cfa-6273-4032-b781-4a7b9c7ffec1
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Month
+		dataType: string
+		lineageTag: c8033966-f28a-4063-ae6c-219b29415cca
+		summarizeBy: none
+		sourceColumn: Month
+		sortByColumn: MonthNumber
+
+	column MonthNumber
+		dataType: int64
+		isHidden
+		lineageTag: 663a14bb-9b95-48ba-a8df-879c0dae2ae0
+		summarizeBy: none
+		sourceColumn: MonthNumber
+
+	partition Date = m
+		mode: import
+		source =
+				let
+					Dates = List.Dates(#date(2025, 1, 1), Duration.Days(#date(2025, 9, 30) - #date(2025, 1, 1)) + 1, #duration(1, 0, 0, 0)),
+					T = Table.FromList(Dates, Splitter.SplitByNothing(), type table [Date = date]),
+					M = Table.AddColumn(T, "Month", each Date.ToText([Date], "MMM yyyy", "en-US"), type text),
+					N = Table.AddColumn(M, "MonthNumber", each Date.Month([Date]), Int64.Type)
+				in
+					N
+

@@ -1,0 +1,47 @@
+table 'UA Spend'
+	lineageTag: 37581f21-e749-4500-b3a4-02b67aef82c5
+
+	column date
+		dataType: dateTime
+		formatString: dd mmm yyyy
+		lineageTag: 7cff29c9-2b04-4e60-aec6-fce40b570aef
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column channel
+		dataType: string
+		lineageTag: e60253cd-6e7d-4e16-8e49-089d000d5a93
+		summarizeBy: none
+		sourceColumn: channel
+
+	column country
+		dataType: string
+		lineageTag: eaff7f0d-d408-4f6c-bb72-845ee0383eec
+		summarizeBy: none
+		sourceColumn: country
+
+	column installs
+		dataType: int64
+		lineageTag: d5153dea-7ce1-47ad-a48f-95f41cb5bed0
+		summarizeBy: none
+		sourceColumn: installs
+
+	column spend_eur
+		dataType: double
+		formatString: #,0.00
+		lineageTag: fcb2ce06-2969-49ca-a50b-9b716ed2082b
+		summarizeBy: none
+		sourceColumn: spend_eur
+
+	partition 'UA Spend' = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(File.Contents(DataFolder & "clean\sim_ua_spend.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(Promoted, {{"date", type date}, {"channel", type text}, {"country", type text}, {"installs", Int64.Type}, {"spend_eur", type number}}, "en-US")
+				in
+					Typed
+

@@ -1,0 +1,68 @@
+table 'AB Test'
+	lineageTag: efdf13a4-8566-49e2-bd80-3e63f4991f82
+
+	column metric
+		dataType: string
+		lineageTag: 0827456a-a1bd-4a21-8d41-25c5cab8e4a9
+		summarizeBy: none
+		sourceColumn: metric
+
+	column gate_30
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 73a88cc8-ee12-4524-b08d-6bf51e63b7f2
+		summarizeBy: none
+		sourceColumn: gate_30
+
+	column gate_40
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 777b0835-8261-4858-bef7-e2a97467f86f
+		summarizeBy: none
+		sourceColumn: gate_40
+
+	column difference_pts
+		dataType: double
+		formatString: 0.00
+		lineageTag: b4326f01-8793-4926-b7fa-ab8c51239736
+		summarizeBy: none
+		sourceColumn: difference_pts
+
+	column p_value
+		dataType: double
+		formatString: 0.0000
+		lineageTag: 023dc78f-e794-41e1-b004-94ac7787d075
+		summarizeBy: none
+		sourceColumn: p_value
+
+	column ci_low_pts
+		dataType: double
+		formatString: 0.00
+		lineageTag: 76d37c26-0c2a-4e19-9096-fcd7570765a3
+		summarizeBy: none
+		sourceColumn: ci_low_pts
+
+	column ci_high_pts
+		dataType: double
+		formatString: 0.00
+		lineageTag: 80f93c04-1361-4094-88f0-c53c5bf30ec0
+		summarizeBy: none
+		sourceColumn: ci_high_pts
+
+	column prob_gate30_better
+		dataType: double
+		formatString: 0%
+		lineageTag: d3986ff8-abd3-4d6c-9fa5-a2d5f01a8ddf
+		summarizeBy: none
+		sourceColumn: prob_gate30_better
+
+	partition 'AB Test' = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(File.Contents(DataFolder & "output\ab_test_results.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(Promoted, {{"metric", type text}, {"gate_30", type number}, {"gate_40", type number}, {"difference_pts", type number}, {"p_value", type number}, {"ci_low_pts", type number}, {"ci_high_pts", type number}, {"prob_gate30_better", type number}}, "en-US")
+				in
+					Typed
+

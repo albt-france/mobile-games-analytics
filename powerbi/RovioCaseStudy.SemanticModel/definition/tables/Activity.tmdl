@@ -1,0 +1,48 @@
+table Activity
+	lineageTag: 7f29d36b-2b94-4c84-9c74-4145d9c23f21
+
+	column player_id
+		dataType: int64
+		lineageTag: 1ed27a64-46a6-4f77-aab9-8818c136754a
+		summarizeBy: none
+		sourceColumn: player_id
+
+	column activity_date
+		dataType: dateTime
+		formatString: dd mmm yyyy
+		lineageTag: ec267f2d-eda0-4f00-ad95-0d7ab3e6996a
+		summarizeBy: none
+		sourceColumn: activity_date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column day_n
+		dataType: int64
+		lineageTag: 623cc873-6af6-435d-8978-908006030f0e
+		summarizeBy: none
+		sourceColumn: day_n
+
+	column iap_revenue_eur
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 5c784516-6660-4147-aeed-4cbc0100c24f
+		summarizeBy: none
+		sourceColumn: iap_revenue_eur
+
+	column ad_revenue_eur
+		dataType: double
+		formatString: #,0.0000
+		lineageTag: 7452cb82-cadf-46f6-aea5-d34152eaa0e4
+		summarizeBy: none
+		sourceColumn: ad_revenue_eur
+
+	partition Activity = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(File.Contents(DataFolder & "clean\sim_daily_activity.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(Promoted, {{"player_id", Int64.Type}, {"activity_date", type date}, {"day_n", Int64.Type}, {"iap_revenue_eur", type number}, {"ad_revenue_eur", type number}}, "en-US")
+				in
+					Typed
+

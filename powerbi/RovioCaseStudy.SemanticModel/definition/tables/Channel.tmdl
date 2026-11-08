@@ -1,0 +1,13 @@
+table Channel
+	lineageTag: c04022ec-04dd-4183-8fd7-a1e81dae7830
+
+	column channel
+		dataType: string
+		lineageTag: 944ac7bd-68bf-4594-b509-3efd16a2365a
+		summarizeBy: none
+		sourceColumn: channel
+
+	partition Channel = m
+		mode: import
+		source = #table(type table [channel = text], {{"Organic"}, {"Google"}, {"Meta"}, {"AppLovin"}, {"Unity Ads"}, {"TikTok"}})
+

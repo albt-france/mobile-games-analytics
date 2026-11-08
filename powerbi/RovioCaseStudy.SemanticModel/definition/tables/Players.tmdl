@@ -1,0 +1,46 @@
+table Players
+	lineageTag: 05b72aae-a842-4aaf-b2d8-c77b4b7e94e8
+
+	column player_id
+		dataType: int64
+		lineageTag: 12a97075-57a9-4cb5-b451-21f669c3b351
+		summarizeBy: none
+		sourceColumn: player_id
+
+	column install_date
+		dataType: dateTime
+		formatString: dd mmm yyyy
+		lineageTag: a6f5cc42-0658-4351-8639-fa44e69fd8d8
+		summarizeBy: none
+		sourceColumn: install_date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column channel
+		dataType: string
+		lineageTag: 2da4d383-2b77-4dcf-bc38-bccf51ebb3d3
+		summarizeBy: none
+		sourceColumn: channel
+
+	column country
+		dataType: string
+		lineageTag: d18b4494-a1e8-488e-9595-566be2657245
+		summarizeBy: none
+		sourceColumn: country
+
+	column platform
+		dataType: string
+		lineageTag: 0472e19a-1389-42cd-8a05-b9e49ce9ed3e
+		summarizeBy: none
+		sourceColumn: platform
+
+	partition Players = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(File.Contents(DataFolder & "clean\sim_players.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(Promoted, {{"player_id", Int64.Type}, {"install_date", type date}, {"channel", type text}, {"country", type text}, {"platform", type text}}, "en-US")
+				in
+					Typed
+

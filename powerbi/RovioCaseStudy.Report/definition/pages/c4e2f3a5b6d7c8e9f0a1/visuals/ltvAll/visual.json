@@ -1,0 +1,109 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "ltvAll",
+  "position": {
+    "x": 32,
+    "y": 156,
+    "z": 4000,
+    "height": 470,
+    "width": 916,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LTV Curves"
+                    }
+                  },
+                  "Property": "day_n"
+                }
+              },
+              "queryRef": "LTV Curves.day_n",
+              "nativeQueryRef": "day_n"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "LTV Forecast"
+                }
+              },
+              "queryRef": "_Measures.LTV Forecast",
+              "nativeQueryRef": "LTV Forecast"
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LTV Curves"
+                    }
+                  },
+                  "Property": "channel"
+                }
+              },
+              "queryRef": "LTV Curves.channel",
+              "nativeQueryRef": "channel"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Forecast cumulative LTV per install by channel, EUR'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

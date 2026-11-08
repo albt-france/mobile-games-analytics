@@ -1,0 +1,60 @@
+table 'Channel ROAS'
+	lineageTag: 855c6e65-8f1f-448a-bab8-3c96849a7c09
+
+	column channel
+		dataType: string
+		lineageTag: ca358962-62a5-48ad-83ea-a9a9ebe1e81e
+		summarizeBy: none
+		sourceColumn: channel
+
+	column paid_installs
+		dataType: int64
+		lineageTag: a80bbe00-292d-4047-907a-1d4870e474ee
+		summarizeBy: none
+		sourceColumn: paid_installs
+
+	column spend_eur
+		dataType: double
+		formatString: #,0
+		lineageTag: 25f3f09b-99c9-4d75-abe3-d0e1a308d484
+		summarizeBy: none
+		sourceColumn: spend_eur
+
+	column cpi_eur
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 8722d934-46c8-46ca-aa58-ec1c20f6dbf4
+		summarizeBy: none
+		sourceColumn: cpi_eur
+
+	column roas_d7
+		dataType: double
+		formatString: 0%
+		lineageTag: 1d7f82bf-c786-4533-b10b-0733bf5183b1
+		summarizeBy: none
+		sourceColumn: roas_d7
+
+	column roas_d30
+		dataType: double
+		formatString: 0%
+		lineageTag: 9c1ad3b1-6358-45e2-8789-d4eda2bb9a77
+		summarizeBy: none
+		sourceColumn: roas_d30
+
+	column roas_d90
+		dataType: double
+		formatString: 0%
+		lineageTag: eec7621b-7208-4e13-a211-ec5ea53941dc
+		summarizeBy: none
+		sourceColumn: roas_d90
+
+	partition 'Channel ROAS' = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(File.Contents(DataFolder & "output\03_channel_roas.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(Promoted, {{"channel", type text}, {"paid_installs", Int64.Type}, {"spend_eur", type number}, {"cpi_eur", type number}, {"roas_d7", type number}, {"roas_d30", type number}, {"roas_d90", type number}}, "en-US")
+				in
+					Typed
+

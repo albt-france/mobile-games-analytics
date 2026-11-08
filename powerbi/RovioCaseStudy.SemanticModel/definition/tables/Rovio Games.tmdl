@@ -1,0 +1,32 @@
+table 'Rovio Games'
+	lineageTag: 344390d8-05a8-4b83-8318-a08bedc90d47
+
+	column quarter
+		dataType: string
+		lineageTag: aae84759-a2b7-492d-80d9-5aeec8d724b3
+		summarizeBy: none
+		sourceColumn: quarter
+
+	column game
+		dataType: string
+		lineageTag: 78c43a36-c23e-466d-a182-4d919ecdffb8
+		summarizeBy: none
+		sourceColumn: game
+
+	column gross_bookings_eur_m
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 2274f29f-8967-4340-ba61-bcc05f620819
+		summarizeBy: none
+		sourceColumn: gross_bookings_eur_m
+
+	partition 'Rovio Games' = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(File.Contents(DataFolder & "clean\rovio_gross_bookings_by_game.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(Promoted, {{"quarter", type text}, {"game", type text}, {"gross_bookings_eur_m", type number}}, "en-US")
+				in
+					Typed
+

@@ -1,0 +1,39 @@
+table 'LTV Curves'
+	lineageTag: 9534a6ce-9912-4f66-b438-f007e1272413
+
+	column channel
+		dataType: string
+		lineageTag: 771043dd-8615-43e8-812f-be2b046efc9f
+		summarizeBy: none
+		sourceColumn: channel
+
+	column day_n
+		dataType: int64
+		lineageTag: 1146fc6e-26ce-4141-befc-45d405eb50f5
+		summarizeBy: none
+		sourceColumn: day_n
+
+	column ltv_forecast_eur
+		dataType: double
+		formatString: #,0.00
+		lineageTag: cd67c6fc-9d65-4e72-9c86-abcb9d2137c6
+		summarizeBy: none
+		sourceColumn: ltv_forecast_eur
+
+	column ltv_actual_eur
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 0f079e58-c684-4ce0-a2dc-96f635d16284
+		summarizeBy: none
+		sourceColumn: ltv_actual_eur
+
+	partition 'LTV Curves' = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(File.Contents(DataFolder & "output\ltv_curves.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(Promoted, {{"channel", type text}, {"day_n", Int64.Type}, {"ltv_forecast_eur", type number}, {"ltv_actual_eur", type number}}, "en-US")
+				in
+					Typed
+

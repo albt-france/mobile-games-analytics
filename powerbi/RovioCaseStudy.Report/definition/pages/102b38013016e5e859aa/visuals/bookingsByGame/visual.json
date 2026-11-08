@@ -1,0 +1,109 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "bookingsByGame",
+  "position": {
+    "x": 32,
+    "y": 300,
+    "z": 8000,
+    "height": 380,
+    "width": 1856,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Rovio Games"
+                    }
+                  },
+                  "Property": "quarter"
+                }
+              },
+              "queryRef": "Rovio Games.quarter",
+              "nativeQueryRef": "quarter"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Rovio Gross Bookings (EUR m)"
+                }
+              },
+              "queryRef": "_Measures.Rovio Gross Bookings (EUR m)",
+              "nativeQueryRef": "Rovio Gross Bookings (EUR m)"
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Rovio Games"
+                    }
+                  },
+                  "Property": "game"
+                }
+              },
+              "queryRef": "Rovio Games.game",
+              "nativeQueryRef": "game"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Gross bookings by game, EUR m (stacked)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

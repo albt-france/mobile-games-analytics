@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "RovioCaseStudy"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "74701cf7-efa8-4063-a1e3-dd32d52323c1"
+  }
+}

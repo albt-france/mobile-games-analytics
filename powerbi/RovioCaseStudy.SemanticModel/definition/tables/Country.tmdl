@@ -1,0 +1,13 @@
+table Country
+	lineageTag: c8371fa4-56cf-497a-910d-7a07b6970362
+
+	column country
+		dataType: string
+		lineageTag: 2962608c-7ed0-4984-9618-84cbeb8bbdce
+		summarizeBy: none
+		sourceColumn: country
+
+	partition Country = m
+		mode: import
+		source = #table(type table [country = text], {{"US"}, {"DE"}, {"GB"}, {"FR"}, {"JP"}, {"BR"}, {"IN"}, {"Other"}})
+

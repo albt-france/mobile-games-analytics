@@ -1,0 +1,204 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1638.7938608619356,
+            "y": 458.26987995749846
+          },
+          "nodeIndex": "_Measures",
+          "nodeLineageTag": "1e3ae136-29b2-436c-a321-07c0628cca01",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1922.7938608619356,
+            "y": 472.26987995749846
+          },
+          "nodeIndex": "AB Test",
+          "nodeLineageTag": "efdf13a4-8566-49e2-bd80-3e63f4991f82",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 557.93985426613767,
+            "y": 966.539759914997
+          },
+          "nodeIndex": "Activity",
+          "nodeLineageTag": "7f29d36b-2b94-4c84-9c74-4145d9c23f21",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 549.69845439463131,
+            "y": 413.21164811995391
+          },
+          "nodeIndex": "Channel",
+          "nodeLineageTag": "c04022ec-04dd-4183-8fd7-a1e81dae7830",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 836.79386086193574,
+            "y": 299.4087342107988
+          },
+          "nodeIndex": "Channel ROAS",
+          "nodeLineageTag": "855c6e65-8f1f-448a-bab8-3c96849a7c09",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2206.7938608619356,
+            "y": 508.26987995749846
+          },
+          "nodeIndex": "Cohort Retention",
+          "nodeLineageTag": "9609b495-7c3d-4f19-b35d-dcc38973f424",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 627.59873255430648
+          },
+          "nodeIndex": "Country",
+          "nodeLineageTag": "c8371fa4-56cf-497a-910d-7a07b6970362",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 267.1265979923084,
+            "y": 783.5170177234055
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "00f6abd8-3261-4ad3-9c7b-1f938441413c",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 284.1954761997124,
+            "y": 26.673463060780364
+          },
+          "nodeIndex": "LTV Curves",
+          "nodeLineageTag": "9534a6ce-9912-4f66-b438-f007e1272413",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 571.27137104656913,
+            "y": -50
+          },
+          "nodeIndex": "LTV Forecast",
+          "nodeLineageTag": "9542e344-3f9f-44e0-9428-73d947331549",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 553.92828154215545,
+            "y": 599.31603480131093
+          },
+          "nodeIndex": "Players",
+          "nodeLineageTag": "05b72aae-a842-4aaf-b2d8-c77b4b7e94e8",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1404.7938608619356,
+            "y": 482.26987995749846
+          },
+          "nodeIndex": "Rovio Games",
+          "nodeLineageTag": "344390d8-05a8-4b83-8318-a08bedc90d47",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1120.7938608619356,
+            "y": 408.26987995749846
+          },
+          "nodeIndex": "Rovio Quarterly",
+          "nodeLineageTag": "c51e93b3-a101-4553-9764-bb4d0fca1004",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 263.12813277795323,
+            "y": 375.45987725449618
+          },
+          "nodeIndex": "UA Spend",
+          "nodeLineageTag": "37581f21-e749-4500-b3a4-02b67aef82c5",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Toutes les tables",
+      "zoomValue": 50.346892102823148,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Toutes les tables",
+  "defaultDiagram": "Toutes les tables"
+}

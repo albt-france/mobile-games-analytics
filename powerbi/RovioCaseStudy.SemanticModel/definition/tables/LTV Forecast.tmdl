@@ -1,0 +1,91 @@
+table 'LTV Forecast'
+	lineageTag: 9542e344-3f9f-44e0-9428-73d947331549
+
+	column channel
+		dataType: string
+		lineageTag: a953dee5-c1c1-49e7-8433-478a8ec282eb
+		summarizeBy: none
+		sourceColumn: channel
+
+	column cpi_eur
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 12c7efe4-2d16-40bb-b7f6-abf27340170c
+		summarizeBy: none
+		sourceColumn: cpi_eur
+
+	column ltv_d90_actual
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 209ef1ba-ff73-4ad7-a89b-7d93162d2137
+		summarizeBy: none
+		sourceColumn: ltv_d90_actual
+
+	column ltv_d180_forecast
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 6c84e8e8-5a2f-4433-9896-d75aa372117b
+		summarizeBy: none
+		sourceColumn: ltv_d180_forecast
+
+	column ltv_d365_forecast
+		dataType: double
+		formatString: #,0.00
+		lineageTag: ac256f75-e2f3-41fa-8b06-2059e4c27922
+		summarizeBy: none
+		sourceColumn: ltv_d365_forecast
+
+	column roas_d365_forecast
+		dataType: double
+		formatString: 0%
+		lineageTag: 814c6665-75a1-4c43-9785-2da6a68e182a
+		summarizeBy: none
+		sourceColumn: roas_d365_forecast
+
+	column payback_day
+		dataType: double
+		formatString: #,0
+		lineageTag: e9cb058d-f473-442b-82b3-d15ecae2f6c2
+		summarizeBy: none
+		sourceColumn: payback_day
+
+	column fit_mape
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 12d3c907-7e6d-49f5-a92f-08ad595c3889
+		summarizeBy: none
+		sourceColumn: fit_mape
+
+	column holdout_d30_to_d90_error
+		dataType: double
+		formatString: 0.0%
+		lineageTag: e7241416-65de-4650-a40b-2f14abd8c2ec
+		summarizeBy: none
+		sourceColumn: holdout_d30_to_d90_error
+
+	column a
+		dataType: string
+		lineageTag: fd03f113-96b3-42b1-a6b5-6a7ca6892be5
+		summarizeBy: none
+		sourceColumn: a
+
+		annotation SummarizationSetBy = Automatic
+
+	column b
+		dataType: string
+		lineageTag: f7e63ced-625c-4549-89ba-c0cc11819eb5
+		summarizeBy: none
+		sourceColumn: b
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'LTV Forecast' = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(File.Contents(DataFolder & "output\ltv_forecast_by_channel.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(Promoted, {{"channel", type text}, {"cpi_eur", type number}, {"ltv_d90_actual", type number}, {"ltv_d180_forecast", type number}, {"ltv_d365_forecast", type number}, {"roas_d365_forecast", type number}, {"payback_day", type number}, {"fit_mape", type number}, {"holdout_d30_to_d90_error", type number}}, "en-US")
+				in
+					Typed
+
